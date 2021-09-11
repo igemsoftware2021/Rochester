@@ -31,11 +31,15 @@ ydata = array([1, 20, 39, 60, 76, 91, 103, 101, 100,
 # a, b, c, and d are parameters (constants) to be determined, t is
 # Resistance, and a + b*log(t) is Concentration
 # p0 is our initial guesses for a, b, c, and d, respectively.
+# We don't use covariance, just storing it because curve_fit yields two
+# outputs.
 params, covariance = curve_fit(
     lambda t, a, b, c, d: a + b * exp(c * t + d), xdata, ydata, p0=(0, 0.5, 0.0005, 0))
 
-print(params)
+print(f'a, b, c, and d: {params}')
 # [-1.54585335e+02  6.45104247e+00  8.36850408e-03  3.28891975e+00]
+print(
+    f'Equation predicting Concentration (y) from Resistance (x): {params[0]} + {params[1]}e^({params[2]}x + {params[3]})')
 
 # Terrible fit because this dummy data is not very exponential, but the
 # real experimental data we collect likely will be.
