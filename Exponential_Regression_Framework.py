@@ -18,7 +18,7 @@ from numpy import exp
 xdata = array([5, 10, 15, 20, 25, 30, 35, 40, 45,
               50, 55, 60, 65, 70, 75, 80, 85])
 
-# Corresponding Concentration dummy data points (same procedure):
+# Corresponding Concentration (in sweat) dummy data points (same procedure):
 ydata = array([1, 20, 39, 60, 76, 91, 103, 101, 100,
               102, 108, 106, 120, 151, 160, 180, 230])
 
@@ -39,7 +39,7 @@ params, covariance = curve_fit(
 print(f'a, b, c, and d: {params}')
 # [-1.54585335e+02  6.45104247e+00  8.36850408e-03  3.28891975e+00]
 print(
-    f'Equation predicting Concentration (y) from Resistance (x): {params[0]} + {params[1]}e^({params[2]}x + {params[3]})')
+    f'Equation predicting Sweat Concentration (y) from Resistance (x): {params[0]} + {params[1]}e^({params[2]}x + {params[3]})')
 
 # Terrible fit because this dummy data is not very exponential, but the
 # real experimental data we collect likely will be.
