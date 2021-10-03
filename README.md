@@ -27,13 +27,16 @@ It is important to figure out time at which  binding and dissociation of biomark
   
 Our pipeline for producing a diagnostic readout from the electrical signal measured by our hardware consists of curve_fitting_experimentation.ipynb, Exponential_Regression_Framework.py, Linear_Regression_Framework.py, and Linear_Regression_Applied.py. The first 3 models were all more rough and done along the way, which you can see for our debugging and learning-the-necessary code process. In Linear_Regression_Applied.py, we actually determine the parameters in the equations to convert sweat concentration to plasma concentration. As of September 24th we have not yet been able to apply the Exponential_Regression_Framework.py to determine parameters for the earlier-in-the-pipeline conversion of Resistance (the electrical property) to sweat concentration because we are awaiting calibration data from experiments. Our final software that converts the input Resistance value into an upvote-downovte for each biomarker being <filename>.
   
-## Details for each model (background, prereqs/installation)
+### Details for each model 
   
-*Reduction Method Model
+#### Reduction Method Model
   
-(Background/definitions)
+##### Background/definitions
+Reduction: a reaction during which the oxygen content of a molecule is decreased, or in other words electrons are added into the system.
+D/G ratio: the G band is associated with sp2 hybridised carbon vibrations and the D band is associated with sp3-like carbons (which don’t have any oxygen groups, except potentially OH) - maybe link better definition from rGO writeup
+rGO: reduced graphene oxide, which was either chemically or bacterially reduced from graphene oxide
   
-Installation
+##### Installation
   
 Prerequisites: R and (recommended) R Studio for Linux, Windows, or MacOS. See https://techvidvan.com/tutorials/install-r/ for instructions for all operating systems. 
   
