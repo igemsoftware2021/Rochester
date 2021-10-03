@@ -33,7 +33,9 @@ Our pipeline for producing a diagnostic readout from the electrical signal measu
   
 ##### Background/definitions
 Reduction: a reaction during which the oxygen content of a molecule is decreased, or in other words electrons are added into the system.
+
 D/G ratio: the G band is associated with sp2 hybridised carbon vibrations and the D band is associated with sp3-like carbons (which don’t have any oxygen groups, except potentially OH) - maybe link better definition from rGO writeup
+
 rGO: reduced graphene oxide, which was either chemically or bacterially reduced from graphene oxide
   
 ##### Installation
