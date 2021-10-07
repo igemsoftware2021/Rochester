@@ -8,9 +8,11 @@ from numpy import array
 
 
 # Data for Sweat Concentration of IL-1b eyeballed from graph (source of
-# error) in Marques-Deak, A., et al. Measurement of cytokines in sweat
-# patches and plasma in healthy women: Validation in a controlled study.
-# Journal of Immunological Methods. 2006, 315, 99-109.
+# error) in Marques-Deak, A.; Cizza, G.; Eskandari, F.; Torvik, S.;
+# Christie, I.C.; Sternberg, E.M.; Philips, T.M. Measurement of cytokines
+# in sweat patches and plasma in healthy women: Validation in a controlled
+# study. Journal of Immunological Methods. 2006, 315, 99-109. DOI:
+# 10.1016/j.jim.2006.07.011
 il1bsweat = array([6.9, 6.9, 7, 7.5, 8.4, 10.2, 11.1, 13.5, 18.5])
 
 # Data for Plasma Concentration of IL-1b from graph in Marques-Deak et al.
@@ -29,13 +31,10 @@ params, covariance = curve_fit(
     lambda t, a, b: a + b * t, il1bsweat, il1bplasma)
 
 print(f'a and b: {params}')
-# [6.53676471 2.13970588]
 print(
     f'Equation predicting IL-1beta Concentration in Plasma from Sweat: {params[0]} + {params[1]}x')
 
 
-# Find way in revisions to display multiple plots at once, or perhaps have
-# inline. Experiment with jupyter notebooks on GitHub.
 pyplot.scatter(il1bsweat, il1bplasma, label='data')
 plt.plot(il1bsweat, params[0] + params[1] * il1bsweat)
 
@@ -50,9 +49,7 @@ plt.show()
 
 
 # Data for Sweat Concentration of IL-6 eyeballed from graph (source of
-# error) in Marques-Deak, A., et al. Measurement of cytokines in sweat
-# patches and plasma in healthy women: Validation in a controlled study.
-# Journal of Immunological Methods. 2006, 315, 99-109.
+# error) in Marques-Deak, A., et al.
 il6sweat = array([7.8, 8.2, 8.4, 8.5, 9.5, 10.4, 11.6, 11.7, 14.5])
 
 # Data for Plasma Concentration of IL-6 from graph in Marques-Deak et al.
@@ -71,7 +68,6 @@ params, covariance = curve_fit(
     lambda t, a, b: a + b * t, il6sweat, il6plasma)
 
 print(f'a and b: {params}')
-# [6.53676471 2.13970588]
 print(
     f'Equation predicting IL-6 Concentration in Plasma from Sweat: {params[0]} + {params[1]}x')
 
@@ -91,9 +87,7 @@ plt.show()
 
 
 # Data for Sweat Concentration of TNF-a eyeballed from graph (source of
-# error) in Marques-Deak, A., et al. Measurement of cytokines in sweat
-# patches and plasma in healthy women: Validation in a controlled study.
-# Journal of Immunological Methods. 2006, 315, 99-109.
+# error) in Marques-Deak, A., et al.
 tnfasweat = array([9.4, 9.9, 10.1, 10.2, 11.8, 12.9, 13.8, 16.6, 20.5])
 
 # Data for Plasma Concentration of TNF-a from graph in Marques-Deak et al.
@@ -112,7 +106,6 @@ params, covariance = curve_fit(
     lambda t, a, b: a + b * t, tnfasweat, tnfaplasma)
 
 print(f'a and b: {params}')
-# [6.53676471 2.13970588]
 print(
     f'Equation predicting TNF-alpha Concentration in Plasma from Sweat: {params[0]} + {params[1]}x')
 

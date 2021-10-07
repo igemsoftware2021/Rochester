@@ -26,7 +26,11 @@ ydata = array([1, 20, 39, 60, 76, 91, 103, 101, 100,
 # This source is about exponential, but the setup works for linear regression.
 
 # We expect Plasma Concentration to vary linearly with Sweat Concentration.
-# Source: Marques-Deak, A., et al. Measurement of cytokines in sweat patches and plasma in healthy women: Validation in a controlled study. Journal of Immunological Methods. 2006, 315, 99-109.
+# Source: Marques-Deak, A.; Cizza, G.; Eskandari, F.; Torvik, S.;
+# Christie, I.C.; Sternberg, E.M.; Philips, T.M. Measurement of cytokines
+# in sweat patches and plasma in healthy women: Validation in a controlled
+# study. Journal of Immunological Methods. 2006, 315, 99-109. DOI:
+# 10.1016/j.jim.2006.07.011
 params, covariance = curve_fit(
     lambda t, a, b: a + b * t, xdata, ydata)
 
