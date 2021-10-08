@@ -1,7 +1,7 @@
 %kinetic parameters for normal levels of CRP. CRP chosen because it had the
 %lowest kd 
 kd_CRP = 6.2E-12; %Kd of CRP in M
-c_CRP = 6.6E-8;%normal concentration of CRP in M
+c_CRP = 6.6E-8;%normal concentration of CRP (in Molarity)
 fracbound_eq=c_CRP/(c_CRP+kd_CRP); %fraction bound of CRP at equilibrium
 kon_CRP = [10^5:20e4:10^6]; %range of kon rates for CRP in 1/Ms based on literature 
 kobs_on_CRP= c_CRP*kon_CRP; %1/s
