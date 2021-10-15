@@ -1,19 +1,21 @@
-#We need impedance. Try to predict impedance based on how much the sheet is reduced and how big it is. 
-#Based on D/G ratio, we get the specific surface area. From that, we can eliminate the surface area of oxygen groups
-#(Ena)ONE PART: GRAPH made based on table from tuning paper (Table 1) from XPS data => we will know relation oxygen percentage and sp2 Carbons
+﻿---
+title: "Reduction model"
+output: pdf_document
+---
+This model predicts how many and what type of functional groups remain on the rGO, depending on the degree of reduction. The model then predicts what concentrations of aptamers should be used for the optimal attachment. 
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+A CSV (comma-separated values) file is a t file in which information is separated by commas.
+CSV files are most commonly encountered in spreadsheets and databases. Using the results from paper "Tuning the Oxygen Content of Reduced Graphene Oxide and Effects on Its Properties", we entered the percentages of different oxygen-containing functional groups after different degrees of reduction in Excel and exported it as .csv file.
 ```{r}
 carbon <- read.csv("C percentage.csv")
 oxygen <- read.csv ("Oxygen concentration.csv")
 ```
 
-
-```{r} 
-carbon_saturation <- data.frame(carbon)
-oxygen_saturation <- data.frame (oxygen)
-```
+Following graphs solve for percentages of different functional froups after reduction. 
 
 Depending on concentration of reducing agent, what is percentage of C=C
 ```{r}
@@ -22,7 +24,7 @@ reduction_y <- carbon_saturation$C.C
 
 boxplot(reduction_y~reduction_x, main = "% Carbon concentration after reduction with HI",
      xlab ="[HI] reduction", ylab = "C=C %")
-
+```
 Depending on concentration of reducing agent, what is percentage of C=O?
 
 ```{r}
@@ -32,8 +34,7 @@ reduction_y1 <- oxygen_saturation$C.O
 boxplot(reduction_y1~reduction_x1, main = "% Oxygen concentration after reduction with HI",
         xlab ="[HI] reduction", ylab = "C=O %")
 ```
-
-Depending on concentration of reducing agent, what is percentage of C-O-C
+Depending on concentration of reducing agent, what is percentage of C-O-C?
 ```{r}
 reduction_x2 <-  oxygen_saturation$X
 reduction_y2 <- oxygen_saturation$C.O.C
@@ -42,7 +43,6 @@ boxplot(reduction_y2~reduction_x2, main = "% Oxygen concentration after reductio
         xlab ="[HI] reduction", ylab = "C-O-C %")
 
 ```
-
 Depending on concentration of reducing agent, what is percentage of water?
 
 ```{r}
@@ -52,7 +52,6 @@ reduction_y3 <- oxygen_saturation$WATER
 boxplot(reduction_y3~reduction_x3, main = "% Oxygen concentration after reduction with HI",
         xlab ="[HI] reduction", ylab = "Water %")
 ```
-
 Depending on concentration of reducing agent, what is percentage of C sp3?
 
 ```{r}
@@ -62,6 +61,7 @@ reduction_y4<- carbon_saturation$C.sp3
 boxplot(reduction_y4~reduction_x4, main = "% Carbon concentration after reduction with HI",
         xlab ="[HI] reduction", ylab = "C sp3 %")
 ```
+Next, we looked at percentages of sp2 carbon given the percentage of various oxygen-containing groups. 
 
 What is the percentage of C=C at specific C=O %?
 
@@ -70,90 +70,152 @@ What is the percentage of C=C at specific C=O %?
 x <- oxygen_saturation$C.O
 y<- carbon_saturation$C.C
 
-plot(x, y, main = "C=O vs C=C",
+plot(x, y, main = "C=C vs C=O",
      xlab = "%C=O", ylab = "%C=C",
      pch = 19, col= "blue", frame = FALSE)
 abline(lm(y ~ x), col = "orange")
-```
 
+
+```
 ```{r}
 cor(x,y)
 ```
-
 What is the percentage of C=C at specific C-O-C %?
 ```{r}
 x1 <- oxygen_saturation$C.O.C
 y1<- carbon_saturation$C.C
 
-plot(x1, y1, main = "C-O-C vs C=C",
+plot(x1, y1, main = "C=C vs C-O-C",
      xlab = "% C-O-C", ylab = "% C=C",
      pch = 19, col= "blue", frame = FALSE)
 abline(lm(y1 ~ x1), col = "orange")
 ```
-
+```{r}
+cor(x1,y1)
+```
 What is the percentage of C=C at specific water %?
 
 ```{r}
 x2 <- oxygen_saturation$WATER
 y2<- carbon_saturation$C.C
 
-plot(x2, y2, main = "water vs C=C",
+plot(x2, y2, main = "C=C vs H2O",
      xlab = "% H2O", ylab = "%C=C",
      pch = 19, col= "blue", frame = FALSE)
 abline(lm(y2 ~ x2), col = "orange")
+
 ```
+```{r}
+cor(x2,y2)
+```
+Look more into carbon concentrated compounds
 
-#(Anca)second part: specific surface area predicted from D/G ratio =>overall surface area
+```{r}
+#look at relationship between C=O and C=C when C is concentrated
+C_x <-carbon_saturation$C.O
+C_y<- carbon_saturation$C.C
 
+plot(x1, y1, main = "C=C vs C=O",
+     xlab = "% C=O", ylab = "% C=C",
+     pch = 19, col= "blue", frame = FALSE)
+abline(lm(C_y ~ C_x), col = "orange")
+```
+```{r}
+cor(C_x,C_y)
+```
+```{r}
+C_x1 <-carbon_saturation$C.O.C
+C_y1<- carbon_saturation$C.C
+
+plot(x1, y1, main = "C=C vs C-O-C",
+     xlab = "% C-O-C", ylab = "% C=C",
+     pch = 19, col= "blue", frame = FALSE)
+abline(lm(C_y1 ~ C_x1), col = "orange")
+```
+```{r}
+cor(C_x1,C_y1)
+```
+```{r}
+C_x2 <-carbon_saturation$O.C.O
+C_y2<- carbon_saturation$C.C
+
+plot(x1, y1, main = "C=C vs O-C-O",
+     xlab = "% O-C-O", ylab = "% C=C",
+     pch = 19, col= "blue", frame = FALSE)
+
+abline(lm(C_y2 ~ C_x2), col = "orange")
+```
+```{r}
+cor(C_x2,C_y2)
+```
+#Second part: finding equation that relates specific surface area to D/G ratio
 #data from the BET SSA analysis of different graphene materials paper
 getMeanFunctions()
-df <- data.frame(x=c(0.843,0.911,0.984,0.991,0.996,1.016,1.023,1.025,1.071,1.264,1.281,2.937), y=c(25,70,300,300,315,310,485,500,575,680,680,685))
-library(drc)
-#creating the gompertz with lower limit at zero, 3 parameters model
-fm <- drm(y ~ x, data = df, fct = LL.4())
-#plotting the obtained fitting
-plot(fm)
-summary(fm)
-#initial equation can be found in reduction Id/Ig ratios spreadsheet
-#different code trying to improve the fit
-#making separate numeric vectors for each data type (x - D/G ratio, y - SSA)
+f <- function(x,a,b) {a * exp(b * x)}
+#making individual vectors for each data type and using another model to fit
 x <- c(0.843,0.911,0.984,0.991,0.996,1.016,1.023,1.025,1.071,1.264,1.281,2.937)
 y <- c(25,70,300,300,315,310,485,500,575,680,680,685)
-#testing the correlation and its p value
-cor(x, y, method = c("pearson","kendall", "spearman"))
-cor.test(x, y, method = c("pearson","kendall", "spearman"))
-library(cgam)
-plot(y~x)
-#trying a different fitting model
-fit <- nls(y ~ SSlogis(x, Asym, xmid, scal), data = data.frame(x, y))
-summary(fit)
-fitmodel <- nls(y ~ a/(1 + exp(-b * (x-c)) ) + d, start=list(a=1,b=.5,c=25))
-sigmoid = function(params, x) {
-  params[1] / (1 + exp(-params[2] * (x - params[3])))
-}
-#third part: remove surface area occupied by oxygen groups (look for bond lengths and how much space is taken) (OR JUST find area of sp2 carbons and oxygens)
+df <- data.frame(x=c(0.843,0.911,0.984,0.991,0.996,1.016,1.023,1.025,1.071,1.264,1.281,2.937), y=c(25,70,300,300,315,310,485,500,575,680,680,685))
+fm0 <- nls(log(y) ~ log(f(x, a, b)), df, start = c(a = 1, b = 1))
+
+ddt <- nls(y ~ f(x, a, b), df, start = coef(fm0))
+ddt
+summary(ddt)
+plot(x, y, main = "SSA vs. Id/Ig ratio", xlab = "Ratio of intensities of D band over G band", ylab = "Specific Surface Area (m^2/g)", col="blue")
+lines(x, fitted(ddt), lty = 2, lwd = 2, col = "red")
+Third part: remove surface area occupied by oxygen groups (look for bond lengths and how much space is taken) (OR JUST find area of sp2 carbons and oxygens)
+
 In graphene sheet:  OH groups, COOH, and epoxide
 
 ```{r}
-#lengths in Angstroms
+#lengths in Angstroms (10^-10m)
 OH_length = 0.964
 C=O_in_carboxyl_lenght = 1.21
 COH_in_carboxyl_length = 1.30
-CO_in_epoxide_length = 1.47
+CO_in_epoxide_length = 1.47 
+C=O_in_carbonyl_length = 1.23
+C-C = 1.42
+```
+
 equation for surface area
 e =2.718
-SSA(x) = -488.67 + 689.516*(e)^16.35(x-0.9758)
+SSA(x) = 263.35 * e^(0.357*x)
 
-Prediction: Reduction of OH gives 1 sp2 carbon, COOH gives 2, and epoxide gives 2.
+Prediction: Reduction of OH gives 1 sp2 carbon (OH could already have sp2 carbon though), COOH gives 2, and epoxide gives 2.
 
-On sketch:GO seems to have: the carbon to oxygen ratio to be approximately three to one.
+On sketch:GO seems to have: the carbon to oxygen ratio to be approximately three to one. Also, the ratio of hydroxyl:epoxy groups: 2:1. Could assume that carboxyl:epoxide=2:1???
 ```{r}
 #in nm
 GO_layer <- 1.1
 ```
-
-```{r}
-#based on one sketch _ have 2 OH, 3 epoxy, and 9 carboxy
-```
-#fourth part: connect number/conc of aptamers to sheet size and percentage of sp2 carbons
-
+#Fourth (last) part
+ratio <- readline(prompt = "Enter Raman data, D/G ratio")
+ratio_num <- as.numeric(ratio)
+area <- 263.35*exp(0.357*ratio_num)
+#the area (SSA) is in m^2/gram, so to find the area of one molecule
+#we can multilpy the SSA by 12, the molar mass of carbon
+#and divide that by the Avogadro's number, to get the area of one molecule of rGO
+one_molec <- (area*12)/(6.022*10^23)
+#area of one hexagon, based on the length of C-C bonds is
+area_one <- 3*sqrt(3)*((1.42*10^-10)^2)/2
+#number of hexagones
+hexs <- one_molec/area_one
+#number of carbons: 3 hexagons means 13 carbons. Then, each hexagon adds 3 or 4
+#carbons, depending on its location. So we can consider it adds 3.5
+carbs <- 13 + (hexs-3)*3.5
+#this is the total number of carbons, but we need to find the number of carbons
+#that do not have oxygen groups, and are double bonded to another carbon, because
+#this is where the aptamers will attach
+#we will obtain data from wetlab on the percentage of C-O-C groups, and then we can
+#determine the percentage of C=C groups from the previous graphs
+coc_content <- readline(prompt = "Enter percentage of C-O-C groups: ")
+coc_percentage <- as.numeric(co_content)
+#we will get relationship from previous graph. approx: 70-x
+cc_percentage <- 70-coc_percentage
+sp2_carbs <- cc_percentage*carbs/100
+#the number of aptamers is equal to the number of double bonds, which is half the
+#number of double bonded carbons
+apt_number <- sp2_carbs/2
+apt_moles <- apt_number/(6.022*10^23)
+apt_conc <- apt_moles/(2*10^-3)
+apt_conc #printing output
