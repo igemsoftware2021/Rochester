@@ -55,7 +55,8 @@ print(f'a, b, c, and d: {params}')
 print(
     f'Equation predicting CRP Sweat Concentration (y) from Resistance (x): {params[0]} + {params[1]}e^({params[2]}x + {params[3]})')
 
-xdata_displayed = linspace(200, 1500, 100)
+# Allows for the graphing of the determined equation as a smooth curve
+xdata_displayed = linspace(200, 1500, 100) # creates 100 data points of Resistance evenly spaced from 200 Ohms to 1500 Ohms
 
 
 # Source on how to specify colors: https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py
@@ -63,7 +64,11 @@ xdata_displayed = linspace(200, 1500, 100)
 # Source on formatting matplotlib:
 # https://towardsdatascience.com/all-your-matplotlib-questions-answered-420dd95cb4ff
 font1 = {'family': 'serif', 'color': '#6ccfe2'}
+
+# Graphs the experimental data points themselves
 pyplot.scatter(xdata, ydata, label='dummy data', color='#929292')
+
+# Graphs the determined equation as a smooth curve
 plt.plot(xdata_displayed,
          params[0] + params[1] * exp(params[2] * xdata_displayed + params[3]),
          label='best fit curve',
@@ -73,7 +78,7 @@ plt.legend()
 plt.ylabel('Sweat Concentration (nM)', fontsize=10)  # for y label
 plt.xlabel('Resistance (Ohms)', fontsize=10)  # for x label
 plt.title(
-    'Electrical to Concentration relationship on dummy data',
+    'Electrical to Concentration Relationship on Experimental Data',
     fontdict=font1,
     fontsize=15)  # source: https://www.w3schools.com/python/matplotlib_labels.asp
 
