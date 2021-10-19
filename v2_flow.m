@@ -37,9 +37,8 @@ flowrate=vol/time_to_half; %m^3/s. Assuming max channel volume flows in, this is
 %section of the microfluidic channel using the Navier Stokes equation 
 
 
-%The following section is code adapted from 'Navier-Stokes Solver using
-%SIMPLE; - R Surya Narayan. It will input the intial conditions and give
-%the expected flow rate out of the section of the microfluidic channel using Navier Stokes equation.
+%The following section is code adapted from 'Navier-Stokes solver using simple. https://www.mathworks.com/matlabcentral/fileexchange/74996-navier-stokes-solver-using-simple (accessed Sep 22, 2021). 
+%It will input the intial conditions and give the expected flow rate out of the section of the microfluidic channel using Navier Stokes equation.
 %% Practice Navier Stokes 
 %% Boundary and Mesh Parameters
 length_microfluidics = 169E-3; %length along the positive x-directon of the flow domain (in m, mictofluidic length)
