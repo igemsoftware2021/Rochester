@@ -34,9 +34,20 @@ print(f'a and b: {params}')
 print(
     f'Equation predicting IL-1beta Concentration in Plasma from Sweat: {params[0]} + {params[1]}x')
 
+font1={'family':'serif','color':'#6ccfe2'}
 
-pyplot.scatter(il1bsweat, il1bplasma, label='data')
-plt.plot(il1bsweat, params[0] + params[1] * il1bsweat)
+# Source on how to specify colors: https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py
+# Source for hexidecimal code of color: https://www.color-hex.com/color/6ccfe2
+
+# Plots the data points themsevles for IL-1beta from Marques-Deak et al.
+pyplot.scatter(il1bsweat, il1bplasma, label='data from Marques-Deak et al.',color='#929292') # Source on formatting matplotlib: https://towardsdatascience.com/all-your-matplotlib-questions-answered-420dd95cb4ff
+
+# Plots the best fit line
+plt.plot(il1bsweat, params[0] + params[1] * il1bsweat, label='line of best fit',color='#6ccfe2',linestyle='--');
+plt.legend();
+plt.ylabel('Plasma Concentration (pg/mL)', fontsize = 10); #for y label
+plt.xlabel('Sweat Concentration (pg/mL)', fontsize = 10); #for x label
+plt.title('Plasma-Sweat Concentration Relationship for IL-1beta',fontdict=font1,fontsize=15); #source: https://www.w3schools.com/python/matplotlib_labels.asp
 
 # Source: Munir, 2016. Matplotlib plots aren't shown when running file
 # from bash terminal. stack overflow.
@@ -71,9 +82,20 @@ print(f'a and b: {params}')
 print(
     f'Equation predicting IL-6 Concentration in Plasma from Sweat: {params[0]} + {params[1]}x')
 
+font1={'family':'serif','color':'#6ccfe2'}
 
-pyplot.scatter(il6sweat, il6plasma, label='data')
-plt.plot(il6sweat, params[0] + params[1] * il6sweat)
+# Source on how to specify colors: https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py
+# Source for hexidecimal code of color: https://www.color-hex.com/color/6ccfe2
+
+# Plots the data points themsevles for IL-6 from Marques-Deak et al.
+pyplot.scatter(il6sweat, il6plasma, label='data from Marques-Deak et al.',color='#929292') # Source on formatting matplotlib: https://towardsdatascience.com/all-your-matplotlib-questions-answered-420dd95cb4ff
+
+# Plots the best fit line
+plt.plot(il6sweat, params[0] + params[1] * il6sweat, label='line of best fit',color='#6ccfe2',linestyle='--');
+plt.legend();
+plt.ylabel('Plasma Concentration (pg/mL)', fontsize = 10); #for y label
+plt.xlabel('Sweat Concentration (pg/mL)', fontsize = 10); #for x label
+plt.title('Plasma-Sweat Concentration Relationship for IL-6',fontdict=font1,fontsize=15); #source: https://www.w3schools.com/python/matplotlib_labels.asp
 
 # Source: Munir, 2016. Matplotlib plots aren't shown when running file
 # from bash terminal. stack overflow.
@@ -106,12 +128,25 @@ params, covariance = curve_fit(
     lambda t, a, b: a + b * t, tnfasweat, tnfaplasma)
 
 print(f'a and b: {params}')
+# [6.53676471 2.13970588]
 print(
     f'Equation predicting TNF-alpha Concentration in Plasma from Sweat: {params[0]} + {params[1]}x')
 
 
-pyplot.scatter(tnfasweat, tnfaplasma, label='data')
-plt.plot(tnfasweat, params[0] + params[1] * tnfasweat)
+font1={'family':'serif','color':'#6ccfe2'}
+
+# Source on how to specify colors: https://matplotlib.org/stable/tutorials/colors/colors.html#sphx-glr-tutorials-colors-colors-py
+# Source for hexidecimal code of color: https://www.color-hex.com/color/6ccfe2
+
+# Plots the data points themsevles for TNF-alpha from Marques-Deak et al.
+pyplot.scatter(tnfasweat, tnfaplasma, label='data from Marques-Deak et al.',color='#929292') # Source on formatting matplotlib: https://towardsdatascience.com/all-your-matplotlib-questions-answered-420dd95cb4ff
+
+# Plots the line of best fit
+plt.plot(tnfasweat, params[0] + params[1] * tnfasweat, label='line of best fit',color='#6ccfe2',linestyle='--');
+plt.legend();
+plt.ylabel('Plasma Concentration (pg/mL)', fontsize = 10); #for y label
+plt.xlabel('Sweat Concentration (pg/mL)', fontsize = 10); #for x label
+plt.title('Plasma-Sweat Concentration Relationship for TNF-alpha',fontdict=font1,fontsize=15); #source: https://www.w3schools.com/python/matplotlib_labels.asp
 
 # Source: Munir, 2016. Matplotlib plots aren't shown when running file
 # from bash terminal. stack overflow.
