@@ -66,7 +66,7 @@ xdata_displayed = linspace(200, 1500, 100) # creates 100 data points of Resistan
 font1 = {'family': 'serif', 'color': '#6ccfe2'}
 
 # Graphs the experimental data points themselves
-pyplot.scatter(xdata, ydata, label='dummy data', color='#929292')
+pyplot.scatter(xdata, ydata, label='experimental data', color='#929292')
 
 # Graphs the determined equation as a smooth curve
 plt.plot(xdata_displayed,
