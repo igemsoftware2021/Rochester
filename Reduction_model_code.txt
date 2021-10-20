@@ -172,9 +172,9 @@ In graphene sheet:  OH groups, COOH, and epoxide
 OH_length = 0.964
 C=O_in_carboxyl_lenght = 1.21
 COH_in_carboxyl_length = 1.30
-CO_in_epoxide_length = 1.47 
-C=O_in_carbonyl_length = 1.23
-C-C = 1.42
+CO_in_epoxide_length = 1.46 
+C=O_in_carbonyl_length = 1.21
+C-C = 1.54
 ```
 
 equation for surface area
